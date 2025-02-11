@@ -24,7 +24,7 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-          cd /var/www/tmarsik.dev
+          cd /srv/tmarsik.dev
           git pull origin main
           docker-compose down
           docker-compose up -d --build
