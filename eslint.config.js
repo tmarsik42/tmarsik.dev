@@ -30,5 +30,20 @@ export default ts.config(
 				parser: ts.parser
 			}
 		}
+	},
+	{
+		ignores: [
+			'**/.svelte-kit',
+			'**/build',
+			'**/dist',
+			'**/node_modules',
+			'**/package',
+			'**/*.d.ts',
+			'*.config.*',
+			'.DS_Store',
+			'pnpm-lock.yaml',
+			'package-lock.json',
+			'yarn.lock'
+		]
 	}
 );
