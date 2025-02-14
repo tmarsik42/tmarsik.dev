@@ -18,6 +18,11 @@
             thumbnailUrl: "https://picsum.photos/id/237/400/600"
         }
     ];
+
+    const skills: Record<string, { default: Component }> = import.meta.glob(
+        "$lib/svg-icons/skills/*.svelte",
+        { eager: true }
+    );
 </script>
 
 <section>
@@ -45,10 +50,9 @@
 <section>
     <h2>Skills</h2>
     <ul>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>Svelte</li>
-        <li>Tailwind CSS</li>
+        <!-- How to make this more accessible with better dx? -->
+        {#each Object.values(skills) as { default: SkillIcon }}
+            <SkillIcon />
+        {/each}
     </ul>
 </section>
