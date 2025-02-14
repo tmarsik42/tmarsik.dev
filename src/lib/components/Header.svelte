@@ -9,8 +9,8 @@
             href: "/"
         },
         {
-            title: "CV",
-            href: "/cv"
+            title: "About me",
+            href: "/about-me"
         },
         {
             title: "Projects",
