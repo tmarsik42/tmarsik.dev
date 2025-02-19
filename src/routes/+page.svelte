@@ -9,13 +9,13 @@
             name: "tmarsik.dev",
             description:
                 "Personal website showcasing my skills, portfolio, blog, and contact information.",
-            thumbnailUrl: "https://picsum.photos/id/237/400/600"
+            thumbnailUrl: "https://picsum.photos/600/400?random=1"
         },
         {
             id: "2",
             name: "VPS",
             description: "Management of a VPS this website runs on.",
-            thumbnailUrl: "https://picsum.photos/id/237/400/600"
+            thumbnailUrl: "https://picsum.photos/600/400?random=2"
         }
     ];
 
