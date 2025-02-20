@@ -44,11 +44,14 @@
 
         <div>
             <h2 class="text-gray-100">Technologies</h2>
+
             <ul>
                 {#each technologies as technology}
                     <li>{technology}</li>
                 {/each}
             </ul>
+
+            <img src="https://go-skill-icons.vercel.app/api/icons?i=html,css,javascript,sass,svelte,tailwindcss,threejs,typescript,vuejs,webpack,vitest,vite,storybook,playwright,figma,graphql,mysql,nodejs,prisma,strapi,wordpress,dbeaver,vscode,webstorm,neovim,git,github,githubactions,gitlab,docker,nginx,linux,bsd,debian,ubuntu,tmux,yarn,chatgpt,googleanalytics,apple,chrome,safari,bulma,vscode,obsidian&perline=4&theme=dark" alt="exhaustive list of technologies" />
         </div>
     </aside>
 
@@ -75,6 +78,12 @@
                 <li>Server-side rendering (SSR)</li>
                 <li>Data visualization libraries (elk.js, x6, openlayers)</li>
                 <li>Version control with Git (Github and Gitlab)</li>
+            </ul>
+
+            <h3 class="mt-4">Languages:</h3>
+            <ul>
+                <li>Czech – native speaker</li>
+                <li>English – C1 (fluent reading, strong writing, conversational speaking)</li>
             </ul>
         </section>
 
