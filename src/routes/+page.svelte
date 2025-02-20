@@ -5,10 +5,12 @@
         "Frontend dev",
         "Svelte",
         "SvelteKit",
+        "TailwindCSS",
         "GraphQL",
         "REST API",
         "Node.js",
-        "Git"
+        "Git",
+        "Strapi"
     ];
 </script>
 
