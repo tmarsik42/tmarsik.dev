@@ -32,7 +32,7 @@
     <div class="mb-4 flex flex-col justify-center">
         <img src={profile} class="self-center rounded-full" alt="profile" width="100" />
         <a class="font-light text-gray-100" href="mailto:tad.marsik@gmail.com"
-        >tad.marsik@gmail.com</a
+            >tad.marsik@gmail.com</a
         >
         <a class="font-light text-gray-100" href="tel:776727167"> 776 727 167 </a>
         <a class="font-light text-gray-100" href="https://www.linkedin.com/in/tmarsik-dev">
@@ -50,7 +50,11 @@
             {/each}
         </ul>
 
-        <img src="https://go-skill-icons.vercel.app/api/icons?i=html,css,javascript,sass,svelte,tailwindcss,threejs,typescript,vuejs,webpack,vitest,vite,storybook,playwright,figma,graphql,mysql,nodejs,prisma,strapi,wordpress,dbeaver,vscode,webstorm,neovim,git,github,githubactions,gitlab,docker,nginx,linux,bsd,debian,ubuntu,tmux,yarn,chatgpt,googleanalytics,apple,chrome,safari,bulma,vscode&perline=4&theme=dark" alt="exhaustive list of technologies" class="pt-8" />
+        <img
+            src="https://go-skill-icons.vercel.app/api/icons?i=html,css,javascript,sass,svelte,tailwindcss,threejs,typescript,vuejs,webpack,vitest,vite,storybook,playwright,figma,graphql,mysql,nodejs,prisma,strapi,wordpress,dbeaver,vscode,webstorm,neovim,git,github,githubactions,gitlab,docker,nginx,linux,bsd,debian,ubuntu,tmux,yarn,chatgpt,googleanalytics,apple,chrome,safari,bulma,vscode&perline=4&theme=dark"
+            alt="exhaustive list of technologies"
+            class="pt-8"
+        />
     </div>
 {/snippet}
 
@@ -105,7 +109,7 @@
             <div class="mb-8">
                 <b>TETA s.r.o.</b>
                 <p class="mt-1 mb-1">Frontend Web Developer</p>
-                <p class="mt-1 mb-1">June 2021 - Present (3 years 9 months)</p>
+                <p class="mt-1 mb-1">June 2021 - Present</p>
                 <ul>
                     <li>Advanced my expertise in frontend development.</li>
                     <li>Used Typescript and Svelte/SvelteKit from day one.</li>
@@ -126,7 +130,9 @@
             </div>
         </section>
 
-        <section class="mt-6 sm:hidden bg-gray-900 text-gray-100 flex flex-col justify-center items-center">
+        <section
+            class="mt-6 flex flex-col items-center justify-center bg-gray-900 text-gray-100 sm:hidden"
+        >
             {@render contact()}
         </section>
     </main>
