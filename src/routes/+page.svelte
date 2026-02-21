@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { siteInfo } from '$lib/config/info';
+
 	let hoveredBlock = $state<'bio' | 'connect' | null>(null);
 </script>
 
@@ -13,7 +15,7 @@
 		<div class="corner-br">BIO</div>
 		<div class="block-inner">
 			<h2>SPECIFICATION</h2>
-			<p>Software Engineer focused on performant and accessible web systems.</p>
+			<p>{siteInfo.bio}</p>
 		</div>
 	</section>
 
@@ -28,15 +30,17 @@
 		<div class="block-inner">
 			<h2>CONNECT</h2>
 			<ul>
-				<li>
-					<a href="https://github.com/tmarsik42" target="_blank" rel="noopener noreferrer">GITHUB</a>
-				</li>
-				<li>
-					<a href="https://linkedin.com/in/tmarsik-dev" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-				</li>
-				<li>
-					<a href="mailto:tmarsik@email.com">EMAIL</a>
-				</li>
+				{#each siteInfo.links as link}
+					<li>
+						<a
+							href={link.href}
+							target={link.href.startsWith('http') ? '_blank' : undefined}
+							rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+						>
+							{link.label}
+						</a>
+					</li>
+				{/each}
 			</ul>
 		</div>
 	</section>

@@ -88,6 +88,28 @@ html {
 	}
 }
 
+/* ---- Cursor readout (CAD zaměřovač X/Y) ---- */
+.blueprint-cursor-readout {
+	position: fixed;
+	left: 1.5rem;
+	bottom: 5.5rem;
+	z-index: 3;
+	display: flex;
+	gap: 1rem;
+	font-size: 0.7rem;
+	letter-spacing: 0.08em;
+	color: var(--blueprint-text-muted);
+	font-family: 'JetBrains Mono', 'Courier New', monospace;
+	padding: 0.35rem 0.6rem;
+	border: 1px solid var(--blueprint-border);
+	background: var(--blueprint-surface-corner);
+	pointer-events: none;
+}
+
+.blueprint-cursor-readout span {
+	white-space: nowrap;
+}
+
 /* ---- Title block (záhlaví výkresu) ---- */
 .blueprint-title-block {
 	position: relative;

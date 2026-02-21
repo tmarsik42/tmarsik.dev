@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { on } from 'svelte/events';
 	import favicon from '$lib/assets/favicon.svg';
+	import { siteInfo } from '$lib/config/info';
 	import '../app.css';
 
 	let { children } = $props();
@@ -14,9 +15,19 @@
 	});
 
 	let scanlinesEnabled = $state(true);
-	onMount(() => {
+	let mouseX = $state(0);
+	let mouseY = $state(0);
+
+	$effect(() => {
+		if (typeof window === 'undefined') return;
 		scanlinesEnabled = localStorage.getItem('tmarsik-scanline') !== 'false';
+		const off = on(window, 'mousemove', (e: MouseEvent) => {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+		});
+		return off;
 	});
+
 	function toggleScanlines() {
 		scanlinesEnabled = !scanlinesEnabled;
 		localStorage.setItem('tmarsik-scanline', String(scanlinesEnabled));
@@ -27,6 +38,8 @@
 		const time = d.toTimeString().slice(0, 8);
 		return `${date} ${time}`;
 	}
+
+	let formattedDateTime = $derived(formatDateTime(now));
 </script>
 
 <svelte:head>
@@ -41,14 +54,19 @@
 		aria-hidden="true"
 	></div>
 
+	<div class="blueprint-cursor-readout" aria-hidden="true">
+		<span>X: {mouseX}</span>
+		<span>Y: {mouseY}</span>
+	</div>
+
 	<header class="blueprint-title-block">
 		<div class="blueprint-title-block-inner">
 			<span class="blueprint-corner blueprint-corner-tl">0,0</span>
 			<span class="blueprint-corner blueprint-corner-tr">SHEET_1</span>
-			<h1>TMARSIK.DEV</h1>
+			<h1>{siteInfo.name}</h1>
 			<p class="blueprint-drawing-meta">
-				<span>PROJECT: PERSONAL SITE</span>
-				<span>REV: REWRITE_V2.0</span>
+				<span>PROJECT: {siteInfo.project}</span>
+				<span>REV: {siteInfo.rev}</span>
 			</p>
 		</div>
 	</header>
@@ -70,6 +88,6 @@
 				SCANLINE: {scanlinesEnabled ? 'ON' : 'OFF'}
 			</button>
 		</span>
-		<span>DATE: {formatDateTime(now)}</span>
+		<span>DATE: {formattedDateTime}</span>
 	</footer>
 </div>
