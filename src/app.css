@@ -110,6 +110,50 @@ html {
 	white-space: nowrap;
 }
 
+/* ---- Navigation (horní lišta výkresu) ---- */
+.blueprint-nav {
+	position: relative;
+	z-index: 1;
+	border-bottom: 1px solid var(--blueprint-border);
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.blueprint-nav-inner {
+	display: flex;
+	gap: 0;
+	padding: 0;
+}
+
+.blueprint-nav-link {
+	display: block;
+	padding: 0.6rem 1rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--blueprint-text);
+	background: transparent;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-bottom: none;
+	margin-bottom: -1px;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+
+.blueprint-nav-link:hover,
+.blueprint-nav-link:focus {
+	background: var(--blueprint-border-light);
+	color: var(--blueprint-text-heading);
+	outline: none;
+}
+
+.blueprint-nav-link.is-active {
+	background: var(--blueprint-text-heading);
+	color: var(--blueprint-surface-corner);
+	border-color: var(--blueprint-border);
+}
+
 /* ---- Title block (záhlaví výkresu) ---- */
 .blueprint-title-block {
 	position: relative;
@@ -232,3 +276,4 @@ html {
 	color: var(--blueprint-text);
 	outline: none;
 }
+
