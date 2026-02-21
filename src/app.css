@@ -1,0 +1,212 @@
+/* Blueprint / technical drawing – design tokens */
+:root {
+	/* Grid */
+	--blueprint-grid-bg: #fafafa;
+	--blueprint-grid-line: rgba(0, 0, 0, 0.06);
+	--blueprint-grid-size: 20px;
+
+	/* Base */
+	--blueprint-page-bg: #f5f5f4;
+	--blueprint-text: #1f2937;
+	--blueprint-text-heading: #111827;
+	--blueprint-text-muted: #6b7280;
+	--blueprint-text-secondary: #4b5563;
+
+	/* Lines & borders */
+	--blueprint-border: #374151;
+	--blueprint-border-light: #d1d5db;
+
+	/* Surfaces */
+	--blueprint-surface: rgba(255, 255, 255, 0.85);
+	--blueprint-surface-corner: #fafafa;
+
+	/* Accent */
+	--blueprint-accent: #0369a1;
+	--blueprint-accent-underline: rgba(3, 105, 161, 0.5);
+}
+
+/* Base typography & page */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+html {
+	background: var(--blueprint-page-bg);
+	color: var(--blueprint-text);
+	font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+	margin: 0;
+	padding: 0;
+}
+
+/* ---- Sheet wrapper ---- */
+.blueprint-sheet {
+	min-height: 100vh;
+	position: relative;
+	padding: 0;
+}
+
+/* ---- Grid ---- */
+.blueprint-grid-bg {
+	position: fixed;
+	inset: 0;
+	background-color: var(--blueprint-grid-bg);
+	background-image:
+		linear-gradient(to right, var(--blueprint-grid-line) 1px, transparent 1px),
+		linear-gradient(to bottom, var(--blueprint-grid-line) 1px, transparent 1px);
+	background-size: var(--blueprint-grid-size) var(--blueprint-grid-size);
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* ---- Scanline (jemný pohyb řádků, starý monitor/plotr) ---- */
+.blueprint-scanlines {
+	position: fixed;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	background: repeating-linear-gradient(
+		0deg,
+		transparent 0,
+		transparent 3px,
+		rgba(0, 0, 0, 0.035) 3px,
+		rgba(0, 0, 0, 0.035) 4px
+	);
+	background-size: 100% 8px;
+	animation: blueprint-scanline 6s linear infinite;
+}
+
+.blueprint-scanlines.blueprint-scanlines-off {
+	animation: none;
+	opacity: 0;
+	visibility: hidden;
+}
+
+@keyframes blueprint-scanline {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 0 8px;
+	}
+}
+
+/* ---- Title block (záhlaví výkresu) ---- */
+.blueprint-title-block {
+	position: relative;
+	z-index: 1;
+	border-bottom: 1px solid var(--blueprint-border);
+	padding: 1.5rem 1.5rem 1rem;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.blueprint-title-block-inner {
+	position: relative;
+	border: 1px solid var(--blueprint-border);
+	padding: 1rem 1.5rem 1.25rem;
+}
+
+.blueprint-title-block-inner::before,
+.blueprint-title-block-inner::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border: 1px solid var(--blueprint-border);
+	background: var(--blueprint-surface-corner);
+}
+
+.blueprint-title-block-inner::before {
+	top: -1px;
+	left: 12px;
+	border-right: none;
+	border-bottom: none;
+}
+
+.blueprint-title-block-inner::after {
+	top: -1px;
+	right: 12px;
+	border-left: none;
+	border-bottom: none;
+}
+
+.blueprint-corner {
+	position: absolute;
+	font-size: 0.65rem;
+	font-weight: 400;
+	letter-spacing: 0.08em;
+	color: var(--blueprint-text-muted);
+}
+
+.blueprint-title-block .blueprint-corner-tl {
+	top: 0.35rem;
+	left: 0.75rem;
+}
+
+.blueprint-title-block .blueprint-corner-tr {
+	top: 0.35rem;
+	right: 0.75rem;
+}
+
+.blueprint-title-block h1 {
+	font-family: 'JetBrains Mono', 'Courier New', monospace;
+	font-size: 1.5rem;
+	font-weight: 600;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	margin: 0 0 0.5rem 0;
+	color: var(--blueprint-text-heading);
+}
+
+.blueprint-drawing-meta {
+	display: flex;
+	gap: 2rem;
+	margin: 0;
+	font-size: 0.7rem;
+	letter-spacing: 0.1em;
+	color: var(--blueprint-text-muted);
+}
+
+/* ---- Main content area ---- */
+.blueprint-main {
+	position: relative;
+	z-index: 1;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 1.5rem;
+}
+
+/* ---- Footer výkresu ---- */
+.blueprint-sheet-footer {
+	position: relative;
+	z-index: 1;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 1rem 1.5rem 2rem;
+	border-top: 1px solid var(--blueprint-border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	font-size: 0.65rem;
+	letter-spacing: 0.1em;
+	color: var(--blueprint-text-muted);
+}
+
+.blueprint-scanline-toggle {
+	font-family: inherit;
+	font-size: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: color 0.2s ease;
+}
+
+.blueprint-scanline-toggle:hover,
+.blueprint-scanline-toggle:focus {
+	color: var(--blueprint-text);
+	outline: none;
+}

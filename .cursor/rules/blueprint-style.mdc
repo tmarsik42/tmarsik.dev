@@ -1,0 +1,49 @@
+---
+description: Striktní vizuální pravidla blueprint / strojírenského výkresu pro celý web – nikdy z tohoto stylu nevybočovat.
+alwaysApply: true
+---
+
+# Blueprint / Technical Drawing Style (POVINNÉ)
+
+Tento web má jediný povolený vizuální styl: **strojírenský výkres (blueprint)**. Všechny úpravy layoutu, komponent a stylů musí tento styl respektovat. Nikdy nepřidávej jiné vizuální systémy (např. zaoblení, stíny, jiné fonty, barevné palety).
+
+## 1. Barvy a tokeny
+
+- **Používej výhradně CSS proměnné z `src/app.css`**: `--blueprint-grid-bg`, `--blueprint-grid-line`, `--blueprint-grid-size`, `--blueprint-page-bg`, `--blueprint-text`, `--blueprint-text-heading`, `--blueprint-text-muted`, `--blueprint-text-secondary`, `--blueprint-border`, `--blueprint-border-light`, `--blueprint-surface`, `--blueprint-surface-corner`, `--blueprint-accent`, `--blueprint-accent-underline`.
+- Žádné nové barvy mimo tyto tokeny. Odstíny šedé + bílá + jeden decentní akcent (modrá).
+
+## 2. Mřížka a pozadí
+
+- Pozadí stránky: světlé (`var(--blueprint-page-bg)`). Mřížka vždy viditelná (linear-gradient, `var(--blueprint-grid-line)`, `var(--blueprint-grid-size)`).
+- Layout (`+layout.svelte`) poskytuje `.blueprint-sheet`, `.blueprint-grid-bg`, záhlaví a patičku výkresu. Podstránky pouze vyplňují obsah uvnitř `<main class="blueprint-main">`.
+
+## 3. Linky a rohy
+
+- Sekce a bloky: **tenké 1px okraje** (`var(--blueprint-border)`).
+- V rozích bloků **L-shaped přesahy** (pseudo-elementy `::before` / `::after`): malý čtvereček s borderem, bez pravé/dolní nebo levé/dolní hrany, aby to vypadalo jako technický výkres. Barva výplně rohů: `var(--blueprint-surface-corner)`.
+
+## 4. Kóty (technické popisky)
+
+- U hlavních boxů vždy **malé kóty v rozích**: např. `.corner-tl`, `.corner-br` s textem typu `A1`, `BIO`, `LINKS`. Font malý (0.65rem), barva `var(--blueprint-text-muted)`, letter-spacing 0.08em.
+
+## 5. Typografie
+
+- **Pouze monospace**: `'JetBrains Mono', 'Courier New', Courier, monospace`. Žádné jiné fonty.
+- **Nadpisy vždy UPPERCASE** s větším letter-spacingem (0.12em–0.15em).
+- Odkazy a labely v sekcích také uppercase, monospace.
+
+## 6. Struktura obsahu na stránkách
+
+- Obsah uvnitř `blueprint-main`: např. grid nebo sloupce. Bloky obsahu mají třídu `.block`, uvnitř `.block-inner`.
+- Každý vizuální blok: `border: 1px solid var(--blueprint-border)`, `background: var(--blueprint-surface)`, rohové kóty a L-rohy dle vzoru v `+page.svelte`.
+- Sekční nadpisy v blocích: `h2` uppercase, `border-bottom: 1px solid var(--blueprint-border-light)`, `color: var(--blueprint-text-secondary)`.
+
+## 7. Zakázáno
+
+- Zaoblené rohy (`border-radius`).
+- Stíny nebo rozmazání, které by narušily plochý výkresový vzhled.
+- Jakékoli fonty kromě JetBrains Mono / Courier.
+- Nové barvy nebo barevné palety mimo `app.css` tokeny.
+- Odsazení od tohoto geometrického, „výkresového“ vzhledu.
+
+Při přidávání nových stránek nebo komponent vždy kopíruj vzor z `src/routes/+page.svelte` (bloky, kóty, použití proměnných) a z `src/app.css` (tokeny, grid, záhlaví/patička).
