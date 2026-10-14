@@ -1,0 +1,23 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import { site } from '#lib/site.ts';
+	import type { LayoutProps } from './$types';
+
+	let { children }: LayoutProps = $props();
+</script>
+
+<div class="page">
+	<a class="skip-link" href="#content">Skip to content</a>
+
+	<header class="site-header">
+		<a class="site-name" href={resolve('/(site)')}>{site.title}</a>
+	</header>
+
+	<main id="content">
+		{@render children()}
+	</main>
+
+	<footer class="site-footer">
+		<p>© {new Date().getFullYear()} {site.title}</p>
+	</footer>
+</div>
