@@ -1,0 +1,72 @@
+import { z } from 'zod';
+import type { Component } from 'svelte';
+
+// mdsvex parses unquoted YAML dates as ISO timestamps
+const date = z.union([z.iso.date(), z.iso.datetime()]).transform((d) => new Date(d));
+
+const base = {
+	title: z.string().min(1),
+	date,
+	description: z.string().min(1),
+	tags: z.array(z.string()).default([]),
+	draft: z.boolean().default(false)
+};
+
+export const categories = {
+	featured: 'Selected work',
+	'open-source': 'Open source',
+	tool: 'Tools & experiments',
+	archive: 'Archive'
+} as const;
+export type Category = keyof typeof categories;
+
+const workSchema = z.object({
+	...base,
+	category: z.enum(Object.keys(categories) as [Category, ...Category[]]),
+	role: z.string().min(1),
+	period: z.string().min(1),
+	stack: z.array(z.string()),
+	links: z.array(z.object({ label: z.string(), url: z.url() })).default([])
+});
+
+type Module = { default: Component; metadata?: Record<string, unknown> };
+type Kind = 'work';
+
+function load<K extends Kind, S extends z.ZodType<{ date: Date; draft: boolean }>>(
+	kind: K,
+	schema: S,
+	files: Record<string, Module>
+) {
+	return Object.entries(files)
+		.map(([path, mod]) => {
+			const result = schema.safeParse(mod.metadata ?? {});
+			if (!result.success) {
+				throw new Error(`Invalid frontmatter in ${path}:\n${z.prettifyError(result.error)}`);
+			}
+			const slug = path.slice(path.lastIndexOf('/') + 1, -'.md'.length);
+			return { ...result.data, kind, slug, href: `/${kind}/${slug}`, component: mod.default };
+		})
+		.sort((a, b) => b.date.getTime() - a.date.getTime());
+}
+
+export const work = load(
+	'work',
+	workSchema,
+	import.meta.glob<Module>('/src/content/work/*.md', { eager: true })
+);
+
+export type WorkEntry = (typeof work)[number];
+export type Entry = WorkEntry;
+
+export function labelOf(entry: Entry) {
+	return categories[entry.category];
+}
+
+export function formatDate(date: Date) {
+	return date.toLocaleDateString('en-GB', {
+		day: 'numeric',
+		month: 'short',
+		year: 'numeric',
+		timeZone: 'UTC'
+	});
+}

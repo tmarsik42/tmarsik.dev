@@ -119,6 +119,21 @@ hr {
 	margin-block: 2.5rem;
 }
 
+.lede {
+	font-size: 1.15rem;
+	color: var(--muted);
+}
+.meta,
+.eyebrow,
+time {
+	color: var(--muted);
+	font-size: 0.875rem;
+	font-variant-numeric: tabular-nums;
+}
+.eyebrow {
+	margin: 0 0 0.5rem;
+}
+
 /* Skip link: hidden until focused with the keyboard */
 .skip-link {
 	position: absolute;
@@ -167,6 +182,60 @@ hr {
 }
 .site-footer p {
 	margin: 0;
+}
+
+/* Facts */
+.facts {
+	display: grid;
+	gap: 0.25rem;
+	margin-block: 1.5rem 0;
+	font-size: 0.9375rem;
+}
+.facts div {
+	display: grid;
+	grid-template-columns: 7.5rem 1fr;
+	gap: 1rem;
+}
+.facts dt {
+	color: var(--muted);
+}
+.facts dd {
+	margin: 0;
+}
+
+/* Post */
+.post-header {
+	margin-bottom: 2.5rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.prose > :first-child {
+	margin-top: 0;
+}
+.prose blockquote {
+	margin-inline: 0;
+	padding-inline-start: 1rem;
+	border-inline-start: 3px solid var(--border);
+	color: var(--muted);
+}
+.prose img {
+	display: block;
+	margin-block: 2rem;
+}
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9375rem;
+	font-variant-numeric: tabular-nums;
+	display: block;
+	overflow-x: auto;
+}
+.prose th,
+.prose td {
+	text-align: left;
+	padding: 0.4rem 0.75rem 0.4rem 0;
+	border-bottom: 1px solid var(--border);
 }
 
 @media print {
