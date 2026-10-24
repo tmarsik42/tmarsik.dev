@@ -1,4 +1,12 @@
-/* Placeholder styles: enough to judge structure and rhythm. Typography is still to be decided. */
+/* Placeholder styles: enough to judge structure and rhythm. */
+
+/* Recursive 1.085, cut down to Latin + Czech, no italic. How to rebuild: README */
+@font-face {
+	font-family: 'Recursive';
+	src: url('/fonts/recursive.woff2') format('woff2');
+	font-weight: 400 700;
+	font-display: swap;
+}
 
 :root {
 	--bg: #111214;
@@ -9,8 +17,8 @@
 	--accent: #8ab4f8;
 	--warning: #e5b567;
 
-	--font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-	--font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+	--font-body: 'Recursive', system-ui, sans-serif;
+	--font-mono: 'Recursive', ui-monospace, monospace;
 
 	--measure: 68ch;
 	--space: 1.5rem;
@@ -105,6 +113,7 @@ a:hover {
 code,
 pre {
 	font-family: var(--font-mono);
+	font-variation-settings: 'MONO' 1;
 	tab-size: 2;
 	font-size: 0.875em;
 }

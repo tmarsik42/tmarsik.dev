@@ -9,6 +9,13 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link
+		rel="preload"
+		href="/fonts/recursive.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin="anonymous"
+	/>
 	<link rel="alternate" type="application/rss+xml" title={site.title} href="/feed.xml" />
 </svelte:head>
 

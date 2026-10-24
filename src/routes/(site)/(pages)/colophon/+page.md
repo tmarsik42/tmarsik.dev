@@ -19,7 +19,7 @@ So I threw it away and went back to how websites used to be made, plain pages wi
 - **Content:** Markdown files in a git repo, run through mdsvex. Zod checks the frontmatter and stops the build when I make a typo.
 - **Code highlighting:** Shiki colours the code during the build, so it works without any script.
 - **Images:** converted to AVIF and WebP in a few sizes, and your browser downloads the smallest one it can use.
-- **Fonts:** …
+- **Fonts:** Recursive by Arrow Type, cut down to the characters and styles this site uses, so it's one 46 kB file.
 - **Hosting:** my own VPS running Debian, with nginx serving static files.
 
 Old books sometimes end with a short note about how they were made, which typeface they were set in and where they were printed. That note is called a colophon, and this page is mine.
