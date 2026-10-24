@@ -184,6 +184,31 @@ time {
 	margin: 0;
 }
 
+/* Post list */
+.post-list {
+	list-style: none;
+	padding: 0;
+}
+.post-list li {
+	display: grid;
+	grid-template-columns: 7.5rem 1fr;
+	gap: 0 1rem;
+	padding-block: 0.35rem;
+}
+@media (max-width: 30rem) {
+	.post-list li {
+		grid-template-columns: 1fr;
+	}
+}
+.tag {
+	font-size: 0.75rem;
+	color: var(--muted);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	padding: 0 0.5em;
+	margin-inline-start: 0.5em;
+}
+
 /* Facts */
 .facts {
 	display: grid;

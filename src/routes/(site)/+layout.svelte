@@ -11,6 +11,11 @@
 
 	<header class="site-header">
 		<a class="site-name" href={resolve('/(site)')}>{site.title}</a>
+		<nav aria-label="Main">
+			<ul>
+				<li><a href={resolve('/(site)/writing')}>Writing</a></li>
+			</ul>
+		</nav>
 	</header>
 
 	<main id="content">

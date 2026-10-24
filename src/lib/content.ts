@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { Component } from 'svelte';
+import { dev } from '$app/env';
 
 // mdsvex parses unquoted YAML dates as ISO timestamps
 const date = z.union([z.iso.date(), z.iso.datetime()]).transform((d) => new Date(d));
@@ -28,9 +29,10 @@ const workSchema = z.object({
 	stack: z.array(z.string()),
 	links: z.array(z.object({ label: z.string(), url: z.url() })).default([])
 });
+const postSchema = z.object(base);
 
 type Module = { default: Component; metadata?: Record<string, unknown> };
-type Kind = 'work';
+type Kind = 'work' | 'writing' | 'notes';
 
 function load<K extends Kind, S extends z.ZodType<{ date: Date; draft: boolean }>>(
 	kind: K,
@@ -46,6 +48,7 @@ function load<K extends Kind, S extends z.ZodType<{ date: Date; draft: boolean }
 			const slug = path.slice(path.lastIndexOf('/') + 1, -'.md'.length);
 			return { ...result.data, kind, slug, href: `/${kind}/${slug}`, component: mod.default };
 		})
+		.filter((entry) => dev || !entry.draft)
 		.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
@@ -55,11 +58,28 @@ export const work = load(
 	import.meta.glob<Module>('/src/content/work/*.md', { eager: true })
 );
 
+export const writing = load(
+	'writing',
+	postSchema,
+	import.meta.glob<Module>('/src/content/writing/*.md', { eager: true })
+);
+export const notes = load(
+	'notes',
+	postSchema,
+	import.meta.glob<Module>('/src/content/notes/*.md', { eager: true })
+);
+
 export type WorkEntry = (typeof work)[number];
-export type Entry = WorkEntry;
+export type PostEntry = (typeof writing)[number] | (typeof notes)[number];
+export type Entry = WorkEntry | PostEntry;
+
+export const posts: PostEntry[] = [...writing, ...notes].sort(
+	(a, b) => b.date.getTime() - a.date.getTime()
+);
 
 export function labelOf(entry: Entry) {
-	return categories[entry.category];
+	if (entry.kind === 'work') return categories[entry.category];
+	return entry.kind === 'notes' ? 'Note' : 'Article';
 }
 
 export function formatDate(date: Date) {
