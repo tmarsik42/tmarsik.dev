@@ -15,8 +15,8 @@
 						slug: post.slug
 					})}>{post.title}</a
 				>
-				{#if post.kind === 'notes'}<span class="tag">note</span>{/if}
-				{#if post.draft}<span class="tag">draft</span>{/if}
+				{#if post.kind === 'notes'}<span class="tag">(note)</span>{/if}
+				{#if post.draft}<span class="tag">(draft)</span>{/if}
 			</span>
 		</li>
 	{/each}

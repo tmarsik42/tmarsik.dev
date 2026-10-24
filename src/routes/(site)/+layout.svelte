@@ -13,7 +13,9 @@
 		<a class="site-name" href={resolve('/(site)')}>{site.title}</a>
 		<nav aria-label="Main">
 			<ul>
+				<li><a href="{resolve('/(site)')}#work">Work</a></li>
 				<li><a href={resolve('/(site)/writing')}>Writing</a></li>
+				<li><a href="{resolve('/(site)')}#contact">Contact</a></li>
 			</ul>
 		</nav>
 	</header>
