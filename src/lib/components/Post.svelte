@@ -16,7 +16,13 @@
 	} = $props();
 </script>
 
-<Seo title={entry.title} description={entry.description} path={entry.href} type="article" />
+<Seo
+	title={entry.title}
+	description={entry.description}
+	path={entry.href}
+	type="article"
+	image="/og/{entry.kind}/{entry.slug}.png"
+/>
 {#if entry.kind !== 'work'}
 	<JsonLd
 		schema={{
