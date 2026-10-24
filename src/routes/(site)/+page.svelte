@@ -1,16 +1,25 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { site } from '#lib/site.ts';
+	import JsonLd from '#lib/components/JsonLd.svelte';
 	import PostList from '#lib/components/PostList.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 </script>
 
-<svelte:head>
-	<title>{site.title}</title>
-	<meta name="description" content={site.description} />
-</svelte:head>
+<Seo description={site.description} path="/" />
+<JsonLd
+	schema={{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: site.title,
+		url: site.url,
+		email: site.email,
+		sameAs: site.links.map((link) => link.url)
+	}}
+/>
 
 <section class="intro" aria-labelledby="intro-title">
 	<h1 id="intro-title">{site.title}</h1>

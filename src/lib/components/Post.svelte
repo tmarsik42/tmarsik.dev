@@ -2,6 +2,8 @@
 	import type { Snippet } from 'svelte';
 	import { formatDate, labelOf, type Entry } from '#lib/content.ts';
 	import { site } from '#lib/site.ts';
+	import JsonLd from '#lib/components/JsonLd.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 
 	let {
 		entry,
@@ -14,10 +16,20 @@
 	} = $props();
 </script>
 
-<svelte:head>
-	<title>{entry.title} · {site.title}</title>
-	<meta name="description" content={entry.description} />
-</svelte:head>
+<Seo title={entry.title} description={entry.description} path={entry.href} type="article" />
+{#if entry.kind !== 'work'}
+	<JsonLd
+		schema={{
+			'@context': 'https://schema.org',
+			'@type': 'BlogPosting',
+			headline: entry.title,
+			description: entry.description,
+			datePublished: entry.date.toISOString(),
+			url: site.url + entry.href,
+			author: { '@type': 'Person', name: site.title, url: site.url }
+		}}
+	/>
+{/if}
 
 <article>
 	<header class="post-header">

@@ -1,11 +1,8 @@
 <script>
-	import { site } from '#lib/site.ts';
+	import Seo from '#lib/components/Seo.svelte';
 </script>
 
-<svelte:head>
-<title>Colophon · {site.title}</title>
-<meta name="description" content="How this site came to be and what it runs on." />
-</svelte:head>
+<Seo title="Colophon" description="How this site came to be and what it runs on." path="/colophon" />
 
 # Colophon
 
