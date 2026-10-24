@@ -1,57 +1,62 @@
-# sv
+# tmarsik.dev
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+My personal site: writing, notes and work. SvelteKit, every page prerendered to static HTML, no JavaScript in the browser.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Commands
 
 ```sh
-# create a new project
-npx sv create my-app
+pnpm dev       # dev server
+pnpm build     # static site into build/
+pnpm preview   # serve the build
+pnpm lint      # prettier + eslint
+pnpm check     # svelte-check
 ```
 
-To recreate this project with the same configuration:
+## Content
 
-```sh
-# recreate this project
-pnpm dlx sv@1.1.1 create --template minimal --types ts --add prettier eslint sveltekit-adapter="adapter:static" --install pnpm .
+Markdown files in `src/content/`, the file name is the slug:
+
+- `writing/` articles, `/writing/<slug>`
+- `notes/` short notes, also listed under Writing
+- `work/` case studies, `/work/<slug>`
+
+Frontmatter is checked with Zod in `src/lib/content.ts`, a mistake fails the build.
+
+```yaml
+title: Required
+date: 2026-10-24
+description: One sentence, used in lists, meta tags and the feed
+tags: [optional]
+draft: true # only shown in dev
 ```
 
-## Adding features
+Work entries also need `category` (`featured`, `open-source`, `tool`, `archive`), `role`, `period`, `stack` and optionally `links`.
 
-Add features to your project with `sv add`:
+Components for Markdown, imported in a `<script>` block at the top of the post:
 
-```sh
-npx sv add
+```svelte
+<script>
+	import Callout from '#lib/components/Callout.svelte';
+	import Figure from '#lib/components/Figure.svelte';
+	import shot from '#lib/assets/images/shot.png?enhanced';
+</script>
+
+<Callout type="warning">**Warning:** text</Callout>
+
+<Figure src={shot} alt="What's in the image" caption="Optional" />
 ```
 
-For example, to add Tailwind CSS:
+Images for `Figure` go to `src/lib/assets/images/` and get converted to AVIF and WebP at build time. SVGs go to `static/images/` and are used as plain Markdown images.
 
-```sh
-npx sv add tailwindcss
-```
+## Generated files
 
-## Developing
+`/feed.xml`, `/sitemap.xml` and an OG image for every page (`/og.png`, `/og/<kind>/<slug>.png`) are built from the content, nothing to update by hand. New static pages need adding to the list in `src/routes/sitemap.xml/+server.ts`.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+`build/_app/` contains JS chunks that no page loads: SvelteKit builds the client bundle regardless of `csr = false` ([sveltejs/kit#9703](https://github.com/sveltejs/kit/issues/9703)). They can be left out when deploying.
 
-```sh
-npm run dev
+## Deploy
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
+TBD, static files on my VPS behind nginx. 404s should use `error_page 404 /404.html;`.
 
 ## Font
 

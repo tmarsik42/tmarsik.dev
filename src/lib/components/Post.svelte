@@ -40,7 +40,7 @@
 <article>
 	<header class="post-header">
 		<p class="eyebrow">
-			{labelOf(entry)} · <time datetime={entry.date.toISOString()}>{formatDate(entry.date)}</time>
+			{labelOf(entry)}, <time datetime={entry.date.toISOString()}>{formatDate(entry.date)}</time>
 		</p>
 		<h1>{entry.title}</h1>
 		<p class="lede">{entry.description}</p>

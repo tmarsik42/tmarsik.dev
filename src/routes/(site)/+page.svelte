@@ -43,7 +43,7 @@
 					<a href={resolve('/(site)/work/[slug]', { slug: entry.slug })}>{entry.title}</a>
 					<span class="meta">{entry.period}</span>
 					<p>{entry.description}</p>
-					<p class="meta">{entry.role} · {entry.stack.join(', ')}</p>
+					<p class="meta">{entry.role}, {entry.stack.join(', ')}</p>
 				</li>
 			{/each}
 		</ul>

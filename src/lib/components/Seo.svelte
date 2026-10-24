@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>{title ? `${title} · ${site.title}` : site.title}</title>
+	<title>{title ? `${title} | ${site.title}` : site.title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={url} />
 	<meta property="og:type" content={type} />
