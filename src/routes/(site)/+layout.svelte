@@ -26,5 +26,8 @@
 
 	<footer class="site-footer">
 		<p>© {new Date().getFullYear()} {site.title}</p>
+		<ul>
+			<li><a href={resolve('/(site)/(pages)/colophon')}>Colophon</a></li>
+		</ul>
 	</footer>
 </div>
