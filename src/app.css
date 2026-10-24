@@ -7,6 +7,7 @@
 	--muted: #9a978f;
 	--border: #2c2d32;
 	--accent: #8ab4f8;
+	--warning: #e5b567;
 
 	--font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 	--font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -23,6 +24,7 @@
 		--muted: #6b6860;
 		--border: #dedad2;
 		--accent: #1a56c4;
+		--warning: #9a6200;
 	}
 }
 
@@ -277,6 +279,102 @@ time {
 	text-align: left;
 	padding: 0.4rem 0.75rem 0.4rem 0;
 	border-bottom: 1px solid var(--border);
+}
+
+.prose .anchor {
+	margin-inline-start: 0.4em;
+	color: var(--muted);
+	text-decoration: none;
+	opacity: 0;
+}
+.prose :is(h2, h3):hover .anchor,
+.prose .anchor:focus-visible {
+	opacity: 1;
+}
+.prose .footnotes {
+	margin-top: 3rem;
+	font-size: 0.875rem;
+	color: var(--muted);
+}
+
+figure {
+	margin-inline: 0;
+}
+figcaption {
+	margin-top: 0.5rem;
+	color: var(--muted);
+	font-size: 0.875rem;
+}
+
+/* Code blocks, Shiki writes both themes as CSS variables */
+.shiki {
+	background-color: var(--shiki-dark-bg) !important;
+	padding: 1rem 0;
+	border-radius: 6px;
+	overflow-x: auto;
+	line-height: 1.5;
+}
+.shiki span {
+	color: var(--shiki-dark);
+}
+@media (prefers-color-scheme: light) {
+	.shiki {
+		background-color: var(--shiki-light-bg) !important;
+	}
+	.shiki span {
+		color: var(--shiki-light);
+	}
+}
+.shiki code {
+	display: block;
+	width: fit-content;
+	min-width: 100%;
+	font-size: 0.8125rem;
+}
+.shiki .line {
+	display: inline-block;
+	width: 100%;
+	padding-inline: 1rem;
+}
+.shiki .highlighted {
+	background: rgb(138 180 248 / 0.12);
+}
+.shiki .diff.add {
+	background: rgb(80 200 120 / 0.14);
+}
+.shiki .diff.remove {
+	background: rgb(240 90 90 / 0.14);
+	opacity: 0.75;
+}
+.shiki .diff.add::before {
+	content: '+';
+	margin-inline-start: -0.75rem;
+	position: absolute;
+	color: rgb(80 200 120);
+}
+.shiki .diff.remove::before {
+	content: '−';
+	margin-inline-start: -0.75rem;
+	position: absolute;
+	color: rgb(240 90 90);
+}
+
+/* Callout */
+.callout {
+	margin-block: 1.5rem;
+	padding: 0.75rem 1rem;
+	border-inline-start: 3px solid var(--accent);
+	background: var(--surface);
+	border-radius: 0 6px 6px 0;
+}
+.callout[data-type='warning'] {
+	border-color: var(--warning);
+}
+.callout > :first-child {
+	margin-top: 0;
+}
+.callout > :last-child {
+	margin-bottom: 0;
 }
 
 @media print {

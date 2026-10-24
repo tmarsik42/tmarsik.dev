@@ -1,3 +1,4 @@
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
@@ -6,6 +7,7 @@ import { mdsvexOptions } from './mdsvex.config.ts';
 
 export default defineConfig({
 	plugins: [
+		enhancedImages(),
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
