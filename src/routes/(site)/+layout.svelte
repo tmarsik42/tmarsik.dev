@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+	import { posts, work } from '#lib/content.ts';
 	import { site } from '#lib/site.ts';
 	import type { LayoutProps } from './$types';
 
@@ -13,8 +14,12 @@
 		<a class="site-name" href={resolve('/(site)')}>{site.title}</a>
 		<nav aria-label="Main">
 			<ul>
-				<li><a href="{resolve('/(site)')}#work">Work</a></li>
-				<li><a href={resolve('/(site)/writing')}>Writing</a></li>
+				{#if work.length}
+					<li><a href="{resolve('/(site)')}#work">Work</a></li>
+				{/if}
+				{#if posts.length}
+					<li><a href={resolve('/(site)/writing')}>Writing</a></li>
+				{/if}
 				<li><a href="{resolve('/(site)')}#contact">Contact</a></li>
 			</ul>
 		</nav>

@@ -9,9 +9,11 @@
 <Seo title="Writing" description="Articles and short notes." path="/writing" />
 
 <h1>Writing</h1>
-<p class="lede">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p class="lede">Articles, and shorter notes for things that don't need a whole post.</p>
 
 {#each years as [year, list] (year)}
 	<h2>{year}</h2>
 	<PostList posts={list} />
+{:else}
+	<p>Nothing here yet.</p>
 {/each}

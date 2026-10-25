@@ -19,7 +19,9 @@ export default defineConfig({
 			},
 			preprocess: [mdsvex(mdsvexOptions)],
 			extensions: ['.svelte', '.md'],
-			adapter: adapter()
+			adapter: adapter(),
+			// content folders can be empty, which leaves their [slug] routes unseen
+			prerender: { handleUnseenRoutes: 'warn' }
 		})
 	]
 });
