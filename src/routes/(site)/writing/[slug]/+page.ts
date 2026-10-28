@@ -1,8 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { writing } from '#lib/content.ts';
-import type { EntryGenerator, PageLoad } from './$types';
-
-export const entries: EntryGenerator = () => writing.map(({ slug }) => ({ slug }));
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = ({ params }) => {
 	const entry = writing.find(({ slug }) => slug === params.slug);

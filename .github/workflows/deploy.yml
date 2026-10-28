@@ -52,8 +52,7 @@ jobs:
           name: site
           path: site
 
-      # The key can only upload into the web root (rrsync on the server).
-      # No JS: no page loads the client chunks SvelteKit builds anyway.
+      # The key can only upload into the web root (rrsync on the server)
       - name: Upload
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -64,6 +63,5 @@ jobs:
           echo "$DEPLOY_SSH_KEY" > ~/deploy_key
           echo "$DEPLOY_KNOWN_HOSTS" > ~/known_hosts
           rsync -rlt --delete --chmod=D755,F644 \
-            --exclude='*.js' --exclude='_app/version.json' \
             -e "ssh -i ~/deploy_key -o IdentitiesOnly=yes -o UserKnownHostsFile=~/known_hosts" \
             site/ "deploy@$DEPLOY_HOST:"

@@ -52,7 +52,7 @@ Images for `Figure` go to `src/lib/assets/images/` and get converted to AVIF and
 
 `/feed.xml`, `/sitemap.xml` and an OG image for every page (`/og.png`, `/og/<kind>/<slug>.png`) are built from the content, nothing to update by hand. New static pages need adding to the list in `src/routes/sitemap.xml/+server.ts`.
 
-`build/_app/` contains JS chunks that no page loads: SvelteKit builds the client bundle regardless of `csr = false` ([sveltejs/kit#9703](https://github.com/sveltejs/kit/issues/9703)). They can be left out when deploying.
+The build has no JavaScript: SvelteKit skips the client build because every page has `csr = false`. That only works while page options stay static, so don't export `entries` (or any other page option) as a function. The prerender crawler finds every page through links anyway.
 
 ## Deploy
 
