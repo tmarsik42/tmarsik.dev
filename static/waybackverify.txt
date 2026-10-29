@@ -1,0 +1,3 @@
+Wayback Machine exclusion request for tmarsik.dev
+Requested by: Tadeáš Maršík <tad.marsik@gmail.com>
+Exclude captures from 2023-10-24 to 2026-10-12 (old version of the site).
